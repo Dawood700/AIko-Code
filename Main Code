@@ -60,13 +60,13 @@ void setup()
 void loop(){
 char c = Serial.read();
   if(c == '1'){
-  leftMotor.write(70); //go forward
-  rightMotor.write(110);
+  leftMotor.write(LForward); //go forward
+  rightMotor.write(RForward);
   delay(300);
 }
 else if (c == '2') {
-  leftMotor.write(120); //go backward
-  rightMotor.write(60);
+  leftMotor.write(LBackward); //go backward
+  rightMotor.write(RBackward);
   delay(300);
 }
 else if (c == '3') {
@@ -81,8 +81,8 @@ else if (c == '4') {
   delay(80);
 }
 else if (c == 'y') {
-  leftMotor.write(90); //nuetral position
-  rightMotor.write(90);
+  leftMotor.write(RNeutral); //nuetral position
+  rightMotor.write(RNeutral);
 }
 else {
  
