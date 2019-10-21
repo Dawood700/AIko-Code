@@ -101,27 +101,19 @@ void autonomous() {
  int threshold = analogRead(threshold_pot);
   int distance  = ping();  //call the ping function to get the distance in front of the robot
 //  int distance = 17;
-  Serial.print("Thresh:");
-  Serial.print(threshold);
-  Serial.print("(");
-  Serial.print(threshold/2);
-  Serial.print("), L=");
   SensorLeft = analogRead(LeftLightSensor);  //read the left light sensor
-  Serial.print(SensorLeft);
-  Serial.print(", R=");
 
   SensorRight = analogRead(RightLightSensor); //read the right light sensor
   Serial.print(SensorRight);
-  Serial.print(", Diff=");
+
 
   SensorDifference = abs(SensorLeft - SensorRight);  //Calcuate the difference between
                                                      // left and right light sensors
   Serial.print(SensorDifference);
 
-  Serial.print(", Obstacle:");
+ 
   Serial.print(distance);
 
-  Serial.print("cm, Move:");
 
   if (distance > collisionThresh) //if path is clear, the robot can use the light sensors to navigate towards the light
   {
@@ -131,8 +123,7 @@ void autonomous() {
        SensorLeft       >= threshold/2   && 
        SensorRight      >= threshold/2   && 
        SensorDifference <= closeness) 
-       {  
-          Serial.print("Forward");
+       { 
           leftMotor.write(LForward); 
           rightMotor.write(RForward);
           digitalWrite(LeftLEDIndicator, HIGH);
@@ -140,13 +131,11 @@ void autonomous() {
           delay(300);  
         }
 
-  //This condition indicates that the robot has reached the light source,
-  //so it will stop
+  //This condition indicates that the robot has reached the light source
   else if ( SensorLeft       >= threshold && 
             SensorRight      >= threshold && 
             SensorDifference <= closeness) 
-       {  
-          Serial.print("STOP");
+       { 
           leftMotor.write(LNeutral);
           rightMotor.write(RNeutral); 
           digitalWrite(RightLEDIndicator, LOW);
@@ -160,7 +149,6 @@ void autonomous() {
   else if ( SensorLeft       <  SensorRight &&       
             SensorRight       >= threshold/2 ) 
             { 
-              Serial.print("Right");
               leftMotor.write(LForward); 
               rightMotor.write(RBackward);
               digitalWrite(RightLEDIndicator, LOW);
@@ -174,7 +162,6 @@ void autonomous() {
   else if ( SensorLeft       >  SensorRight  &&        
             SensorLeft       >= threshold/2 ) 
             { 
-                Serial.print("Left");
                 leftMotor.write(LBackward); 
                 rightMotor.write(RForward); 
                 digitalWrite(RightLEDIndicator, HIGH);
@@ -186,8 +173,7 @@ void autonomous() {
   //the light, so it should turn around
   else if ( SensorLeft  < threshold/2 && 
             SensorRight < threshold/2) 
-            {                
-                Serial.print("LOST");
+            {             
                 leftMotor.write(LBackwardHalf); 
                 rightMotor.write(RForwardHalf); 
                 delay(300);
@@ -197,7 +183,6 @@ void autonomous() {
   }
   else    // The path is blocked, so the robot will use the distance sensor to find a clear path
   {
-      Serial.print(" blocked ");
       leftMotor.write(LNeutral);   // Stop the left motor
       rightMotor.write(RNeutral);  // Stop the right motor
       panMotor.write(0);           // Turn the distance sensor to the left
@@ -223,7 +208,6 @@ void compareDistance()
   {
     leftMotor.write(LBackward); 
     rightMotor.write(RForward); 
-    Serial.print("Left");
     delay(400); 
     leftMotor.write(LForward);  // Then move forward just a bit
     rightMotor.write(RForward); // to try and clear the obstacle
@@ -233,7 +217,6 @@ void compareDistance()
   {   
     leftMotor.write(LForward);
     rightMotor.write(RBackward); 
-    Serial.print("Right");
     delay(400);
     leftMotor.write(LForward);  // Then move forward just a bit
     rightMotor.write(RForward); // to try and clear the obstacle
@@ -243,7 +226,6 @@ void compareDistance()
   {
     leftMotor.write(LBackward); 
     rightMotor.write(RForward); //turn 180 degrees
-    Serial.print("Back");
     delay(400);
   }
 }
