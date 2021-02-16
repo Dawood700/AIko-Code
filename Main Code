@@ -1,5 +1,6 @@
-/* Aiko was made from following a tutorial by Peter Dalmaris. A large portion of the code was made by him and has been modified by me. The original code can be found at
-* https://github.com/futureshocked/ALSOA/blob/master/ALSOA-410-final_v4/ALSOA-410-final_v4.ino */
+/* Aiko was made from following a tutorial by Peter Dalmaris. A large portion of the code was made by him and has been modified by me to include support for the app. The original code can be found at
+https://github.com/futureshocked/ALSOA/blob/master/ALSOA-410-final_v4/ALSOA-410-final_v4.ino 
+*/
 
 #include <Servo.h> //include Servo library
 #include <HC_SR04.h>
